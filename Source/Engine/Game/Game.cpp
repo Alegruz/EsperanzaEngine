@@ -55,6 +55,9 @@ namespace esperanza
 
 		m_Logger.Destroy();
 		g_Log.Destroy();
+
+		m_pRenderer.reset();
+		m_pMainWindow.reset();
 	}
 
 	INT Game::Run() noexcept

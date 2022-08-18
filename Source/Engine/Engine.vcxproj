@@ -92,6 +92,7 @@
     <ClInclude Include="Renderer\CommandAllocatorPool.h" />
     <ClInclude Include="Renderer\CommandListManager.h" />
     <ClInclude Include="Renderer\Display.h" />
+    <ClInclude Include="Renderer\GpuResource.h" />
     <ClInclude Include="Renderer\Renderer.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Utility\Logger.h" />
@@ -108,6 +109,7 @@
     <ClCompile Include="Renderer\CommandAllocatorPool.cpp" />
     <ClCompile Include="Renderer\CommandListManager.cpp" />
     <ClCompile Include="Renderer\Display.cpp" />
+    <ClCompile Include="Renderer\GpuResource.cpp" />
     <ClCompile Include="Renderer\Renderer.cpp" />
     <ClCompile Include="Utility\Logger.cpp" />
     <ClCompile Include="Window\MainWindow.cpp" />

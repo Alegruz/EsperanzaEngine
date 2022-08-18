@@ -107,6 +107,9 @@ namespace esperanza
 		m_AllocatorPool.Destroy();
 
 		CloseHandle(m_hFenceEventHandle);
+
+		m_pFence.Reset();
+		m_pCommandQueue.Reset();
 	}
 
 	HRESULT CommandQueue::IncrementFence(_Out_ UINT64& uNextFenceValue) noexcept
@@ -348,6 +351,8 @@ namespace esperanza
 		m_GraphicsQueue.Destroy();
 		m_ComputeQueue.Destroy();
 		m_CopyQueue.Destroy();
+
+		m_pDevice.Reset();
 	}
 
 	constexpr CommandQueue& CommandListManager::GetGraphicsQueue() noexcept

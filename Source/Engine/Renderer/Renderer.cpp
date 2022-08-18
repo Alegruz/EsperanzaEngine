@@ -14,9 +14,7 @@ namespace esperanza
 		, m_Display()
 		, m_Viewport()
 		, m_ScissorRect()
-		, m_pSwapChain()
 		, m_pDevice()
-		, m_apRenderTargets{}
 		, m_pCommandAllocator()
 		, m_pCommandQueue()
 		, m_pRootSignature()
@@ -381,12 +379,12 @@ namespace esperanza
 		{
 			_com_error err(hr);
 			LOGEF(m_Logger, L"Initializing command manager failed with HRESULT code %u, %s", hr, err.ErrorMessage());
-
+		
 			return hr;
 		}
-
+		
 		// Initialize Common States
-
+		
 		m_Display.Initialize(window, m_pCommandManager);
 
 		return hr;
@@ -396,7 +394,7 @@ namespace esperanza
 	{
 		m_pCommandManager->IdleGpu();
 		m_pCommandManager->Destroy();
-
+		
 		m_Display.Destroy();
 
 #ifdef _DEBUG
@@ -414,6 +412,17 @@ namespace esperanza
 		// Close the event handle
 
 		m_Logger.Destroy();
+
+
+		m_pFence.Reset();
+		m_VertexBuffer.Reset();
+		m_pPipelineState.Reset();
+		m_pRtvDescriptorHeap.Reset();
+		m_pRootSignature.Reset();
+		m_pCommandQueue.Reset();
+		m_pCommandAllocator.Reset();
+		m_pCommandList.Reset();
+		m_pCommandManager.reset();
 	}
 
 	void Renderer::Update(_In_ FLOAT deltaTime) noexcept

@@ -21,6 +21,7 @@ namespace esperanza
 	void CommandAllocatorPool::Destroy()
 	{
 		m_AllocatorPool.clear();
+		m_pDevice.Reset();
 	}
 
 	HRESULT CommandAllocatorPool::RequestAllocator(_Out_ ID3D12CommandAllocator** ppAllocator, _In_ UINT64 uCompletedFenceValue) noexcept

@@ -30,9 +30,6 @@ namespace esperanza
 		static BOOL isDirectXRayTracingSupported(_In_ ID3D12Device* pTestDevice) noexcept;
 
 	private:
-		static constexpr const UINT NUM_FRAMES = 2;
-
-	private:
 		Log m_Logger;
 		UINT m_uWidth;
 		UINT m_uHeight;
@@ -43,9 +40,7 @@ namespace esperanza
 		// Pipeline objects
 		D3D12_VIEWPORT m_Viewport;
 		D3D12_RECT m_ScissorRect;
-		ComPtr<IDXGISwapChain3> m_pSwapChain;
 		ComPtr<ID3D12Device> m_pDevice;
-		ComPtr<ID3D12Resource> m_apRenderTargets[NUM_FRAMES];
 		ComPtr<ID3D12CommandAllocator> m_pCommandAllocator;
 		ComPtr<ID3D12CommandQueue> m_pCommandQueue;
 		ComPtr<ID3D12RootSignature> m_pRootSignature;

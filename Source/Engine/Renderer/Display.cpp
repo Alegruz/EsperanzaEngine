@@ -145,6 +145,9 @@ namespace esperanza
 		}
 
 		// destroy pre display plane
+
+		m_pSwapChain1.Reset();
+		m_pCommandListManager.reset();
 	}
 
 	HRESULT Display::Resize(UINT uWidth, UINT uHeight) noexcept
