@@ -85,6 +85,15 @@
       <Project>{f58cf4ab-acf7-487a-8ee8-7ffdced589ee}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Engine\directx.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Engine\Resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\Engine\Engine.rc" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

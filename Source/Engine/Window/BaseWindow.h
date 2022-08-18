@@ -1,4 +1,4 @@
-#pragma once
+	#pragma once
 
 #include "Pch.h"
 
@@ -11,7 +11,7 @@ namespace esperanza
 		static LRESULT CALLBACK WindowProc(_In_ HWND hWnd, _In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam);
 
 	public:
-		explicit constexpr BaseWindow() noexcept = default;
+		explicit constexpr BaseWindow() noexcept;
 		BaseWindow(const BaseWindow& other) = delete;
 		BaseWindow(BaseWindow&& other) = delete;
 		BaseWindow& operator=(const BaseWindow& other) = delete;
@@ -22,8 +22,14 @@ namespace esperanza
 		virtual constexpr PCWSTR GetWindowClassName() const noexcept = 0;
 		virtual LRESULT HandleMessage(_In_ UINT uMsg, _In_ WPARAM wParam, _In_ LPARAM lParam) noexcept = 0;
 
-		constexpr HWND GetWindowHandle() const noexcept;
+		void SetCallbackToWindowMessage(UINT uWindowMessage, void (*pFunction)(WPARAM, LPARAM, ULONGLONG), ULONGLONG uParam) noexcept;
 
+		constexpr HWND GetWindowHandle() const noexcept;
+		constexpr BOOL IsActive() const noexcept;
+		constexpr BOOL IsWindowed() const noexcept;
+		constexpr UINT GetWidth() const noexcept;
+		constexpr UINT GetHeight() const noexcept;
+		
 	protected:
 		virtual HRESULT initialize(
 			_In_ HINSTANCE hInstance,
@@ -81,6 +87,12 @@ namespace esperanza
 		HINSTANCE m_hInstance;
 		HWND m_hWnd;
 		LPCWSTR m_lpszName;
+		BOOL m_bIsWindowed;
+		RECT m_rcWindow;
+		RECT m_rcDesktop;
+		UINT m_uColorDepth;
+		BOOL m_bIsActive;
+		std::unordered_map<UINT, std::pair<void(*)(WPARAM, LPARAM, ULONGLONG), ULONGLONG>> m_Callbacks;
 	};
 
 	template<class DerivedType>
@@ -110,9 +122,53 @@ namespace esperanza
 	}
 
 	template<class DerivedType>
+	inline constexpr BaseWindow<DerivedType>::BaseWindow() noexcept
+		: m_hInstance()
+		, m_hWnd()
+		, m_lpszName()
+		, m_bIsWindowed()
+		, m_rcWindow()
+		, m_rcDesktop()
+		, m_uColorDepth()
+		, m_bIsActive(FALSE)
+		, m_Callbacks()
+	{
+	}
+
+	template<class DerivedType>
+	inline void BaseWindow<DerivedType>::SetCallbackToWindowMessage(UINT uWindowMessage, void (*pFunction)(WPARAM, LPARAM, ULONGLONG), ULONGLONG uParam) noexcept
+	{
+		m_Callbacks[uWindowMessage] = { pFunction, uParam };
+	}
+
+	template<class DerivedType>
 	inline constexpr HWND BaseWindow<DerivedType>::GetWindowHandle() const noexcept
 	{
 		return m_hWnd;
+	}
+
+	template<class DerivedType>
+	inline constexpr BOOL BaseWindow<DerivedType>::IsActive() const noexcept
+	{
+		return m_bIsActive;
+	}
+
+	template<class DerivedType>
+	inline constexpr BOOL BaseWindow<DerivedType>::IsWindowed() const noexcept
+	{
+		return m_bIsWindowed;
+	}
+
+	template<class DerivedType>
+	inline constexpr UINT BaseWindow<DerivedType>::GetWidth() const noexcept
+	{
+		return m_rcWindow.right - m_rcWindow.left;
+	}
+
+	template<class DerivedType>
+	inline constexpr UINT BaseWindow<DerivedType>::GetHeight() const noexcept
+	{
+		return m_rcWindow.bottom - m_rcWindow.top;
 	}
 
 	template<class DerivedType>
@@ -151,12 +207,12 @@ namespace esperanza
 			.cbClsExtra = 0,
 			.cbWndExtra = 0,
 			.hInstance = hInstance,
-			.hIcon = LoadIcon(NULL, IDI_APPLICATION),
+			.hIcon = LoadIcon(hInstance, reinterpret_cast<LPCWSTR>(IDI_ESPERANZA)),
 			.hCursor = LoadCursor(NULL, IDC_ARROW),
-			.hbrBackground = static_cast<HBRUSH>(GetStockObject(BLACK_BRUSH)),
+			.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1),
 			.lpszMenuName = nullptr,
 			.lpszClassName = GetWindowClassName(),
-			.hIconSm = LoadIcon(NULL, IDI_APPLICATION)
+			.hIconSm = LoadIcon(hInstance, reinterpret_cast<LPCWSTR>(IDI_ESPERANZA))
 		};
 
 		if (!RegisterClassEx(&wcex))
@@ -176,22 +232,30 @@ namespace esperanza
 		// Create window
 		m_hInstance = hInstance;
 		m_lpszName = pszWindowName;
+		m_bIsWindowed = TRUE;
 
-		RECT rc =
+		m_rcWindow =
 		{
 			.left = 0,
 			.top = 0,
 			.right = nWidth,
 			.bottom = nHeight
 		};
-		AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
+		AdjustWindowRect(&m_rcWindow, WS_OVERLAPPEDWINDOW, FALSE);
+		m_rcDesktop =
+		{
+			.left = 0,
+			.top = 0,
+			.right = GetSystemMetrics(SM_CXSCREEN),
+			.bottom = GetSystemMetrics(SM_CYSCREEN),
+		};
 
 		m_hWnd = CreateWindowEx(
 			0u,
 			GetWindowClassName(),
 			m_lpszName,
 			dwStyle,
-			x, y, rc.right - rc.left, rc.bottom - rc.top,
+			x, y, m_rcWindow.right - m_rcWindow.left, m_rcWindow.bottom - m_rcWindow.top,
 			hWndParent,
 			hMenu,
 			m_hInstance,

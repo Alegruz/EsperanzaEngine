@@ -19,11 +19,21 @@ namespace esperanza
 		~Game() noexcept;
 
 		HRESULT Initialize(_In_ HINSTANCE hInstance, _In_ INT nCmdShow) noexcept;
+		void Destroy() noexcept;
 		INT Run() noexcept;
+
+	private:
+		static DWORD WINAPI run(LPVOID lpParameter) noexcept;
 
 	private:
 		PCWSTR m_pszGameName;
 		std::unique_ptr<MainWindow> m_pMainWindow;
 		std::unique_ptr<Renderer> m_pRenderer;
+		Log m_Logger;
+
+		HANDLE m_hMainThread;
+		DWORD m_dwThreadId;
+		HANDLE m_hTaskWakeUpEvent;
+		BOOL m_bIsRunning;
 	};
 }

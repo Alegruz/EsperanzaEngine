@@ -11,14 +11,30 @@
 
 #include <windows.h>
 
+// The min/max macros conflict with like-named member functions.
+// Only use std::min and std::max defined in <algorithm>.
+#if defined(min)
+#undef min
+#endif
+
+#if defined(max)
+#undef max
+#endif
+
 #include <wrl.h>
+#include <comdef.h>
 
 // DirectX
 #include <d3d12.h>
 #include <dxgi1_6.h>
+#ifdef _DEBUG
+#include <dxgidebug.h>
+#endif
 #include <d3dcompiler.h>
 #include <DirectXMath.h>
 #include <DirectXColors.h>
+
+#include <d3dx12.h>
 
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -30,8 +46,13 @@
 #include <crtdbg.h>
 
 // STL Headers
+#include <cassert>
 #include <filesystem>
 #include <memory>
+#include <mutex>
+#include <queue>
+#include <unordered_map>
+#include <vector>
 
 #include "Resource.h"
 

@@ -87,19 +87,36 @@
   <ItemGroup>
     <ClInclude Include="d3dx12.h" />
     <ClInclude Include="Game\Game.h" />
+    <ClInclude Include="Input\KeyboardInput.h" />
     <ClInclude Include="Pch.h" />
+    <ClInclude Include="Renderer\CommandAllocatorPool.h" />
+    <ClInclude Include="Renderer\CommandListManager.h" />
+    <ClInclude Include="Renderer\Display.h" />
     <ClInclude Include="Renderer\Renderer.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="Utility\Logger.h" />
     <ClInclude Include="Window\BaseWindow.h" />
     <ClInclude Include="Window\MainWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\Game.cpp" />
+    <ClCompile Include="Input\KeyboardInput.cpp" />
     <ClCompile Include="Pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Renderer\CommandAllocatorPool.cpp" />
+    <ClCompile Include="Renderer\CommandListManager.cpp" />
+    <ClCompile Include="Renderer\Display.cpp" />
     <ClCompile Include="Renderer\Renderer.cpp" />
+    <ClCompile Include="Utility\Logger.cpp" />
     <ClCompile Include="Window\MainWindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Engine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="directx.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
