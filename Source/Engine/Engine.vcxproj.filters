@@ -23,6 +23,12 @@
     <Filter Include="Source Files\Input">
       <UniqueIdentifier>{125aa0ca-2b1b-4809-8df6-198e5c488803}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Renderer\Resources">
+      <UniqueIdentifier>{d059980d-74e8-46cc-96c2-472f1095159a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math">
+      <UniqueIdentifier>{2bed81ef-8cf8-4d83-b02d-c9cbe208e630}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Game.h">
@@ -61,7 +67,25 @@
     <ClInclude Include="Renderer\Display.h">
       <Filter>Source Files\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\ColorBuffer.h">
+      <Filter>Source Files\Renderer\Resources</Filter>
+    </ClInclude>
     <ClInclude Include="Renderer\GpuResource.h">
+      <Filter>Source Files\Renderer\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\PixelBuffer.h">
+      <Filter>Source Files\Renderer\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Color.h">
+      <Filter>Source Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Scalar.h">
+      <Filter>Source Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Math.h">
+      <Filter>Source Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\DescriptorHeap.h">
       <Filter>Source Files\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
@@ -93,7 +117,19 @@
     <ClCompile Include="Renderer\Display.cpp">
       <Filter>Source Files\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer\ColorBuffer.cpp">
+      <Filter>Source Files\Renderer\Resources</Filter>
+    </ClCompile>
     <ClCompile Include="Renderer\GpuResource.cpp">
+      <Filter>Source Files\Renderer\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\PixelBuffer.cpp">
+      <Filter>Source Files\Renderer\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Color.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\DescriptorHeap.cpp">
       <Filter>Source Files\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
@@ -106,5 +142,10 @@
     <Image Include="directx.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Math\Functions.inl">
+      <Filter>Source Files\Math</Filter>
+    </None>
   </ItemGroup>
 </Project>

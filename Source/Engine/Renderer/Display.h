@@ -2,6 +2,8 @@
 
 #include "Pch.h"
 
+#include "Renderer/ColorBuffer.h"
+
 namespace esperanza
 {
 	class CommandListManager;
@@ -126,8 +128,8 @@ namespace esperanza
 		FLOAT m_HdrPaperWhite;
 		FLOAT m_MaxDisplayLuminance;
 		eHdrMode m_HdrDebugMode;
-		// ColorBuffer m_PreDisplayBuffer
-		// ColorBuffer m_aDisplayPlanes[NUM_SWAP_CHAIN_BUFFERS];
+		ColorBuffer m_PreDisplayBuffer;
+		ColorBuffer m_aDisplayPlanes[NUM_SWAP_CHAIN_BUFFERS];
 		UINT m_uCurrentBufferIndex;
 
 		ComPtr<IDXGISwapChain1> m_pSwapChain1;

@@ -59,6 +59,7 @@
 
 #include "Resource.h"
 
+#include "Math/Math.h"
 #include "Utility/Logger.h"
 
 using namespace Microsoft::WRL;

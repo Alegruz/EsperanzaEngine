@@ -160,12 +160,12 @@ namespace esperanza
 
 		GLOGIF(L"Changing display resolution to %ux%u", uWidth, uHeight);
 
-		//g_PreDisplayBuffer.Create(L"PreDisplay Buffer", width, height, 1, SwapChainFormat);
-		//
-		//for (uint32_t i = 0; i < NUM_SWAP_CHAIN_BUFFERS; ++i)
-		//{
-		//	g_DisplayPlane[i].Destroy();
-		//}
+		m_PreDisplayBuffer.Create(L"PreDisplay Buffer", uWidth, uHeight, 1, SWAP_CHAIN_FORMAT);
+		
+		for (uint32_t i = 0; i < NUM_SWAP_CHAIN_BUFFERS; ++i)
+		{
+			m_aDisplayPlanes[i].Destroy();
+		}
 
 		if (!m_pSwapChain1)
 		{
@@ -196,7 +196,7 @@ namespace esperanza
 				return hr;
 			}
 
-			//g_DisplayPlane[i].CreateFromSwapChain(L"Primary SwapChain Buffer", pDisplayPlane.Detach());
+			//m_aDisplayPlanes[i].CreateFromSwapChain(L"Primary SwapChain Buffer", pDisplayPlane.Detach());
 		}
 
 		m_uCurrentBufferIndex = 0;

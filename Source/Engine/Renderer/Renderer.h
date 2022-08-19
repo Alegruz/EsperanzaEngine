@@ -2,6 +2,7 @@
 
 #include "Pch.h"
 
+#include "Renderer/DescriptorHeap.h"
 #include "Renderer/Display.h"
 
 namespace esperanza
@@ -44,10 +45,10 @@ namespace esperanza
 		ComPtr<ID3D12CommandAllocator> m_pCommandAllocator;
 		ComPtr<ID3D12CommandQueue> m_pCommandQueue;
 		ComPtr<ID3D12RootSignature> m_pRootSignature;
-		ComPtr<ID3D12DescriptorHeap> m_pRtvDescriptorHeap;
 		ComPtr<ID3D12PipelineState> m_pPipelineState;
 		ComPtr<ID3D12GraphicsCommandList> m_pCommandList;
-		UINT m_uRtvDescriptorSize;
+		
+		DescriptorAllocator m_pDescriptorAllocator[D3D12_DESCRIPTOR_HEAP_TYPE_NUM_TYPES];
 
 		// App resources
 		ComPtr<ID3D12Resource> m_VertexBuffer;

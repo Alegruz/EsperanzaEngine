@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -88,11 +88,17 @@
     <ClInclude Include="d3dx12.h" />
     <ClInclude Include="Game\Game.h" />
     <ClInclude Include="Input\KeyboardInput.h" />
+    <ClInclude Include="Math\Math.h" />
+    <ClInclude Include="Math\Scalar.h" />
     <ClInclude Include="Pch.h" />
+    <ClInclude Include="Renderer\Color.h" />
+    <ClInclude Include="Renderer\ColorBuffer.h" />
     <ClInclude Include="Renderer\CommandAllocatorPool.h" />
     <ClInclude Include="Renderer\CommandListManager.h" />
+    <ClInclude Include="Renderer\DescriptorHeap.h" />
     <ClInclude Include="Renderer\Display.h" />
     <ClInclude Include="Renderer\GpuResource.h" />
+    <ClInclude Include="Renderer\PixelBuffer.h" />
     <ClInclude Include="Renderer\Renderer.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Utility\Logger.h" />
@@ -106,10 +112,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Renderer\Color.cpp" />
+    <ClCompile Include="Renderer\ColorBuffer.cpp" />
     <ClCompile Include="Renderer\CommandAllocatorPool.cpp" />
     <ClCompile Include="Renderer\CommandListManager.cpp" />
+    <ClCompile Include="Renderer\DescriptorHeap.cpp" />
     <ClCompile Include="Renderer\Display.cpp" />
     <ClCompile Include="Renderer\GpuResource.cpp" />
+    <ClCompile Include="Renderer\PixelBuffer.cpp" />
     <ClCompile Include="Renderer\Renderer.cpp" />
     <ClCompile Include="Utility\Logger.cpp" />
     <ClCompile Include="Window\MainWindow.cpp" />
@@ -119,6 +129,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="directx.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Math\Functions.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
